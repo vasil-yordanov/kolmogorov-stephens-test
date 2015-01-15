@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-#include "stephens.h"
-#include "simulate_data.h"
+#include "kolmogorov.h"
+#include "random_generator.h"
 
 int cmp1(const void *x, const void *y)
 {
@@ -37,6 +36,7 @@ int main(int argc, char *argv[])
   double dx;
   double *rnd;
   double *dev;
+  double mu, sigma;
   FILE *f = NULL;
   char *fileprefix;
   char filename[80];
@@ -50,20 +50,18 @@ int main(int argc, char *argv[])
   dev = malloc(sizeof(double)*count);
 
   srand1();
-  x0 = 0.002;
+  x0 = 0.5;
   x1 = 0.0;
   dx = 0.001;
   x = x0;
   for (x = x0; x > x1; x-=dx) {
-//  for (n = 1; n <= 100; n++)
-//  {
     n = (int)(1/x/x);
     rnd = malloc(sizeof(double)*n);
     m = 0;
     for (i=0; i < count; i++)
     {
-      for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); // x[i] = rand_double();
-      dev[i] = stephens(rnd, n, true);
+      for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); 
+      dev[i] = dinstance_normal(rnd, n, true, &mu, &sigma);
       if (((int)(100*(i/(count+0.)))) == m)
       {
          printf("\rx=%e, %d%%", x, m);

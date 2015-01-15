@@ -1,6 +1,8 @@
 CC=gcc
 LIBS=-lm
 
+all: stephens simulate_data deviation_statistics
+
 stephens: stephens.c kolmogorov.c kolmogorov.h
 	$(CC) -o $@ $^ $(LIBS)
 
