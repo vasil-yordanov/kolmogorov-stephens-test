@@ -54,7 +54,27 @@ $
 
 
 ## Program `stephens`
-This program is used to calculate the `sqrt(N)*D_N` for a set of given random variables.
+M. A. Stephens,
+"EDF Statistics for Goodness of Fit and Some Comparisons"
+J. of Amer. Statist. Assoc., 69, 730-737 (1974).
+http://www.math.utah.edu/~morris/Courses/6010/p1/writeup/ks.pdf
+Empirical Distribution Function EDF  F[i].
+Reject hypothesis at chosen level of significance.
+(double) sqN= sqrt(n) - .01 + .85/sqrt(n);
+Probability{max [sqN*fabs(F-F^*)]>D}=alpha
+Table 1, 1.3 Modification, mu and sigma unknown.
+D_alpha refers to upper tail critical value of the 
+Kolmogorov-Smirnov statistics at level alpha,
+giving a (1-alpha) confidential interval.
+--------------
+alpha    D
+==============
+15%     0.775
+10%     0.819
+5%      0.895
+2.5%    0,995
+1.0%    1.035
+--------------
 
 ### Usage:
 ```bash
