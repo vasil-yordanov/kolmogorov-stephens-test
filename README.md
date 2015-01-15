@@ -64,4 +64,4 @@ $
 This program is used to calculate sqrt(N)*D_N as function of N
 ```bash
 ./deviation_statistics test 1000000
-```bash
+```
