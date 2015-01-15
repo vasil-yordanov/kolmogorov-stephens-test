@@ -59,8 +59,8 @@ $ head -n 5 test_1000.txt
 $
 ```
 
-```
-## `deviation_statistics`
+
+## Program `deviation_statistics`
 This program is used to calculate sqrt(N)*D_N as function of N
 ```bash
 ./deviation_statistics test 1000000
