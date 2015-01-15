@@ -12,7 +12,7 @@ After compilation 3 executables will be generated: `deviation_statistics`, `simu
 This project contains 3 executalbe programs each of them will be described in the next chapter
 
 ## Program `simulate_data`
-This program is used to generate set of random variable.
+This program is used to generate set of random variables.
 ### Usage:
 ```bash
 ./simulate_data <type> <file_name> <number_of_points>
@@ -37,7 +37,7 @@ $
 
 
 ## Program `stephens`
-This program is used to calculate the `sqrt(N)*D_N` for a set of given random variable.
+This program is used to calculate the `sqrt(N)*D_N` for a set of given random variables.
 
 ### Usage:
 ```bash
@@ -48,7 +48,20 @@ This program is used to calculate the `sqrt(N)*D_N` for a set of given random va
 ./stephens test_1000.txt
 ```
 
+The first line of the input file should contain the number of random variables in the file. Like:
+```bash
+$ head -n 5 test_1000.txt 
+#1000
+0.693775
+2.050064
+-0.022952
+-0.934158
+$
+```
 
 ```
 ## `deviation_statistics`
-This program is 
+This program is used to calculate sqrt(N)*D_N as function of N
+```bash
+./deviation_statistics test 1000000
+```bash
