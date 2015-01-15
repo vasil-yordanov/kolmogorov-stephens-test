@@ -2,10 +2,19 @@
 Simple C code for applying Kolmogorov test and test Stephens result
 
 # Compiling the code
+
+## Compilation for Linux 
 To compile the code just run make in the project dir.
 ```bash
 make
 ```
+## Compilation for Window
+Download the MinGW compiler: 'http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe/download'
+In MinGW terminal and run the command:
+```bash
+mingw32-make
+```
+
 After compilation 3 executables will be generated: `deviation_statistics`, `simulate_data` and `stephens`
 
 # Running the code
