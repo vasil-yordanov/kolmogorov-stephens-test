@@ -14,16 +14,16 @@ double dinstance(double (*CDF)(double x, va_list params), double x[], int n, boo
   va_list argp;
 
   /* sort the array */
-  if (!verbose) printf("Sorting array...\n");
+  if (verbose) printf("Sorting array...\n");
   qsort(x, n, sizeof(double), cmp);
-  if (!verbose) printf("Done!\n");
+  if (verbose) printf("Done!\n");
 
   // calculate D_max
   D_plus_max = 0;
   D_minus_max = 0;
 
   m = 0;
-  if (!verbose) printf("Calculating D...\n");
+  if (verbose) printf("Calculating D...\n");
   for (i=0; i<n; i++)
   {
     va_start(argp, verbose);
@@ -36,7 +36,7 @@ double dinstance(double (*CDF)(double x, va_list params), double x[], int n, boo
     if (D_minus_max<D_minus) D_minus_max = D_minus;
 
     // print calculation progress
-    if (!verbose) 
+    if (verbose) 
     if (((int)(100*(i/(n+0.)))) == m)
     {
       printf ("\r\r\r\r%d%%",m);
@@ -46,7 +46,7 @@ double dinstance(double (*CDF)(double x, va_list params), double x[], int n, boo
   }
 
   // print calculation progress
-  if (!verbose) printf("\r\r\r\rDone!\n");
+  if (verbose) printf("\r\r\r\rDone!\n");
   if (D_plus_max > D_minus_max) D = D_plus_max;
   else D = D_minus_max;
 
@@ -81,11 +81,11 @@ double avg(double x[], int n, bool verbose)
   // Calculate average value
   mu = 0.;
   m = 0;
-  if (!verbose) printf("Calculating mu...\n");
+  if (verbose) printf("Calculating mu...\n");
   for (i=0; i<n; i++)
   {
     mu += x[i]; 
-    if (!verbose) 
+    if (verbose) 
     if (((int)(100*(i/(n+0.)))) == m)
     {
       printf ("\r\r\r\r%d%%",m);
@@ -94,7 +94,7 @@ double avg(double x[], int n, bool verbose)
     }
   }
   mu /= n+0.;
-  if (!verbose) printf("\r\r\r\rDone!\n");
+  if (verbose) printf("\r\r\r\rDone!\n");
   return mu;
 }
 
@@ -105,11 +105,11 @@ double std(double x[], int n, double mu, bool verbose)
   // Calculate standart deviation
   sigma = 0.;
   m = 0;
-  if (!verbose) printf("Calculating sigma...\n");
+  if (verbose) printf("Calculating sigma...\n");
   for (i=0; i<n; i++)
   {
     sigma += (x[i]-mu)*(x[i]-mu); 
-    if (!verbose) 
+    if (verbose) 
     if (((int)(100*(i/(n+0.)))) == m)
     {
       printf ("\r\r\r\r%d%%",m);
@@ -118,7 +118,7 @@ double std(double x[], int n, double mu, bool verbose)
     }
   }
   sigma = sqrt(sigma/(n-1.)); 
-  if (!verbose) printf("\r\r\r\rDone!\n");
+  if (verbose) printf("\r\r\r\rDone!\n");
   return sigma;
 }
 

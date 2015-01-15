@@ -35,7 +35,7 @@ void stephens(double x[], int n)
   double D, dinstance; 
   double mu, sigma;
   double sqN;
-  D = dinstance_normal(x, n, false, &mu, &sigma);
+  D = dinstance_normal(x, n, true, &mu, &sigma);
   sqN =  sqrt(n) - .01 + .85/sqrt(n);
   dinstance = D*sqN;
 

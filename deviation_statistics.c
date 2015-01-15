@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include "kolmogorov.h"
 #include "random_generator.h"
 
@@ -61,7 +62,7 @@ int main(int argc, char *argv[])
     for (i=0; i < count; i++)
     {
       for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); 
-      dev[i] = dinstance_normal(rnd, n, true, &mu, &sigma);
+      dev[i] = sqrt(n)*dinstance_normal(rnd, n, false, &mu, &sigma);
       if (((int)(100*(i/(count+0.)))) == m)
       {
          printf("\rx=%e, %d%%", x, m);
