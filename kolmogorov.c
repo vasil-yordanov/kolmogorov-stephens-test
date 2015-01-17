@@ -122,6 +122,11 @@ double std(double x[], int n, double mu, bool verbose)
   return sigma;
 }
 
+double dinstance_normal_know_mu_sigma(double x[], int n, bool verbose, double mu, double sigma)
+{
+  return dinstance(normal_CDF, x, n, verbose, mu, sigma);
+}
+
 double dinstance_normal(double x[], int n, bool verbose, double *mu, double *sigma)
 {
   *mu = avg(x,n,false);
@@ -129,5 +134,14 @@ double dinstance_normal(double x[], int n, bool verbose, double *mu, double *sig
   return dinstance(normal_CDF, x, n, verbose, *mu, *sigma);
 }
 
+/*  Specific distribution - Uniform Distribution */
 
+double uniform_CDF(double x, va_list argp)
+{
+  return x;
+}
 
+double dinstance_uniform(double x[], int n, bool verbose)
+{
+  return dinstance(uniform_CDF, x, n, verbose);
+}

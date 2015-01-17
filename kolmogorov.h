@@ -8,4 +8,8 @@ double dinstance(double (*CDF)(double x, va_list params), double x[], int n, boo
 
 double dinstance_normal(double x[], int n, bool verbose, double *mu, double *sigma);
 
+double dinstance_normal_know_mu_sigma(double x[], int n, bool verbose, double mu, double sigma);
+
+double dinstance_uniform(double x[], int n, bool verbose);
+
 #endif
