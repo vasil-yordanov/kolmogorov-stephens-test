@@ -32,7 +32,7 @@ void print_array(char* file_name, double* x, int n)
 
 int main(int argc, char *argv[])
 {
-  int i, j, m, n, count;
+  int i, j, k, m, n, count;
   double x,x0,x1;
   double dx;
   double *rnd;
@@ -51,11 +51,13 @@ int main(int argc, char *argv[])
   dev = malloc(sizeof(double)*count);
 
   srand1();
-  x0 = 0.1;
+  x0 = 0.4;
   x1 = 0.0;
-  dx = 0.01;
+  dx = 0.001;
   x = x0;
   for (x = x0; x > x1; x-=dx) {
+    if (n == (int)(1/x/x)) k++;
+    else k=0;
     n = (int)(1/x/x);
     rnd = malloc(sizeof(double)*n);
     m = 0;
@@ -63,7 +65,7 @@ int main(int argc, char *argv[])
     {
       for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); 
       dev[i] = sqrt(n)*dinstance_normal_know_mu_sigma(rnd, n, false, mu, sigma);
-      //dev[i] = sqrt(n)*dinstance_normal(rnd, n, false, &mu, &sigma);
+      dev[i] = sqrt(n)*dinstance_normal(rnd, n, false, &mu, &sigma);
       //for (j = 0; j < n; j++) rnd[j] = rand_double(); 
       //dev[i] = sqrt(n)*dinstance_uniform(rnd, n, false);
       if (((int)(100*(i/(count+0.)))) == m)
@@ -77,7 +79,7 @@ int main(int argc, char *argv[])
     qsort(dev, count, sizeof(double), cmp1);
     printf("\r%d, %e            \n", n, dev[(int)(95.0/100.0*count)]);
     fflush(stdout);
-    snprintf(filename, sizeof filename, "%s_%d_%d.txt", fileprefix, count, n);
+    snprintf(filename, sizeof filename, "%s_%d_%d_%d.txt", fileprefix, count, n, k);
     print_array(filename, dev, count);
     free(rnd);
   }
