@@ -10,6 +10,8 @@ double dinstance_normal(double x[], int n, bool verbose, double *mu, double *sig
 
 double dinstance_normal_know_mu_sigma(double x[], int n, bool verbose, double mu, double sigma);
 
-double dinstance_uniform(double x[], int n, bool verbose);
+double dinstance_uniform(double x[], int n, bool verbose, double *mu, double *sigma);
+
+double dinstance_uniform_known_mu_sigma(double x[], int n, bool verbose);
 
 #endif
