@@ -138,10 +138,24 @@ double dinstance_normal(double x[], int n, bool verbose, double *mu, double *sig
 
 double uniform_CDF(double x, va_list argp)
 {
-  return x;
+  double mu;
+  double sigma;
+  double b,a;
+  mu = va_arg(argp, double);
+  sigma = va_arg(argp, double);
+  b = mu+sqrt(12.0)/2.0*sigma;
+  a = mu-sqrt(12.0)/2.0*sigma;
+  return (x-a)/(b-a);
 }
 
-double dinstance_uniform(double x[], int n, bool verbose)
+double dinstance_uniform(double x[], int n, bool verbose, double *mu, double *sigma)
 {
-  return dinstance(uniform_CDF, x, n, verbose);
+  *mu = avg(x,n,false);
+  *sigma = std(x,n,*mu,false);
+  return dinstance(uniform_CDF, x, n, verbose, *mu, *sigma);
+}
+
+double dinstance_uniform_known_mu_sigma(double x[], int n, bool verbose)
+{
+  return dinstance(uniform_CDF, x, n, verbose, 0.5, 1/sqrt(12));
 }

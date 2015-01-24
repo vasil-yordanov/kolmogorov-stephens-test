@@ -51,9 +51,9 @@ int main(int argc, char *argv[])
   dev = malloc(sizeof(double)*count);
 
   srand1();
-  x0 = 0.1;
+  x0 = 0.4;
   x1 = 0.0;
-  dx = 0.01;
+  dx = 0.001;
   x = x0;
   for (x = x0; x > x1; x-=dx) {
     n = (int)(1/x/x);
@@ -61,11 +61,11 @@ int main(int argc, char *argv[])
     m = 0;
     for (i=0; i < count; i++)
     {
-      for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); 
-      dev[i] = sqrt(n)*dinstance_normal_know_mu_sigma(rnd, n, false, mu, sigma);
+      //for (j = 0; j < n; j++) rnd[j] = rand_gasdev(); 
+      //dev[i] = sqrt(n)*dinstance_normal_know_mu_sigma(rnd, n, false, mu, sigma);
       //dev[i] = sqrt(n)*dinstance_normal(rnd, n, false, &mu, &sigma);
-      //for (j = 0; j < n; j++) rnd[j] = rand_double(); 
-      //dev[i] = sqrt(n)*dinstance_uniform(rnd, n, false);
+      for (j = 0; j < n; j++) rnd[j] = rand_double(); 
+      dev[i] = sqrt(n)*dinstance_uniform(rnd, n, false, &mu, &sigma);
       if (((int)(100*(i/(count+0.)))) == m)
       {
          printf("\rx=%e, %d%%", x, m);
