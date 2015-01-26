@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <time.h>
 #include "kolmogorov.h"
 #include "random_generator.h"
 
@@ -32,7 +33,8 @@ void print_array(char* file_name, double* x, int n)
 
 int main(int argc, char *argv[])
 {
-  int i, j, k, m, n, count;
+  int j, k, m, n;
+  long int i, count;
   double x,x0,x1;
   double dx;
   double *rnd;
@@ -41,6 +43,7 @@ int main(int argc, char *argv[])
   FILE *f = NULL;
   char *fileprefix;
   char filename[80];
+  struct timespec tstart={0,0}, tend={0,0};
   if (argc != 3) {
      fprintf(stderr, "Error: missing parameters: <file_prefix> <exp_number>\n");
      exit(-1);
@@ -51,7 +54,10 @@ int main(int argc, char *argv[])
   dev = malloc(sizeof(double)*count);
 
   srand1();
-  x0 = 0.4;
+
+  clock_gettime(CLOCK_MONOTONIC, &tstart);
+
+  x0 = 0.25;
   x1 = 0.0;
   dx = 0.001;
   x = x0;
@@ -77,11 +83,17 @@ int main(int argc, char *argv[])
     }
     // sort deviations
     qsort(dev, count, sizeof(double), cmp1);
-    printf("\r%d, %e            \n", n, dev[(int)(95.0/100.0*count)]);
+
+    clock_gettime(CLOCK_MONOTONIC, &tend);
+
+    printf("\r%d, %.5f sec         \n", n, 
+       ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) - 
+       ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec));
     fflush(stdout);
-    snprintf(filename, sizeof filename, "%s_%d_%d_%d.txt", fileprefix, count, n, k);
+    snprintf(filename, sizeof filename, "%s_%ld_%d_%d.txt", fileprefix, count, n, k);
     print_array(filename, dev, count);
     free(rnd);
+    tstart = tend;
   }
   printf("\r\r\r\r\r\r\r\rDone!\n");
   free(dev);

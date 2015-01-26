@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-  int i, j, k, m, n, count, cnt;
+  int i, j, k, m, n, count, cnt, each;
   double dev;
   FILE *fl = NULL;
   FILE *fr = NULL;
@@ -56,18 +56,19 @@ int main(int argc, char *argv[])
     }
     i = 0; // line number
     j = 0; // procentile
+    each = (int)(count*0.005); // each 0.5% , %=5*j/each/10
     while ((read = getline(&line, &len, fr)) != -1) {
        if (i == j) {
-          snprintf(target_filename, sizeof target_filename, "%s/percentile_%d.txt", target_dir, j/1000);
+          snprintf(target_filename, sizeof target_filename, "%s/percentile_%d_%d.txt", target_dir, (5*j/each/10), (5*j/each % 10));
           if (is_first) fw = fopen(target_filename, "w");
           else fw = fopen(target_filename, "a");
           sscanf(line,"%lf\n", &dev);
 //          fprintf(fw,"%d, %s",n,line);          
-          if (n>=16) {
+          if (n>=10) {
             fprintf(fw,"%f, %f\n",1.0/sqrt(n),1.0/dev);          
 	  }
           fclose(fw);
-          j+=1000;
+          j+=each;
        }
        i++;      
     }
