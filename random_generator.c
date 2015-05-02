@@ -41,6 +41,14 @@ double rand_gasdev()
   }
 }
 
+long next_seed(){
+  return next;
+}
+
+void set_seed(long seed){
+  next = seed;
+}
+
 void srand1(){
   next = - time( NULL );
 }
