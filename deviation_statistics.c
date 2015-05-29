@@ -126,24 +126,24 @@ void restore(char* fileprefix, long int* i, int* n, long int* count, int* n_min,
 if (f == NULL) {
 	printf("Cannot fimd file: %s\n",filename);
 }
- fread(i, sizeof(long int), 1, f);
+ if (fread(i, sizeof(long int), 1, f) == 0) { printf("Can not read i\n"); exit(-1);}
  if (debug) printf("i=%ld\n",*i);
- fread(n, sizeof(int), 1, f);
+ if (fread(n, sizeof(int), 1, f) == 0) { printf("Can not read n\n"); exit(-1);}
  if (debug) printf("n=%d\n",*n);
- fread(count, sizeof(long int), 1, f);
+ if (fread(count, sizeof(long int), 1, f) == 0) { printf("Can not read count\n"); exit(-1);}
  if (debug) printf("count=%ld\n",*count);
- fread(n_min, sizeof(int), 1, f);
+ if (fread(n_min, sizeof(int), 1, f) == 0) { printf("Can not read n_min\n"); exit(-1);}
  if (debug) printf("n_min=%d\n",*n_min);
- fread(n_max, sizeof(int), 1, f);
+ if (fread(n_max, sizeof(int), 1, f) == 0) { printf("Can not read n_max\n"); exit(-1);}
  if (debug) printf("n_max=%d\n",*n_max);
- fread(x, sizeof(double), 1, f);
+ if (fread(x, sizeof(double), 1, f)  == 0) { printf("Can not read x\n"); exit(-1);}
  if (debug) printf("x=%e\n",*x);
- fread(k, sizeof(int), 1, f);
+ if (fread(k, sizeof(int), 1, f) == 0) { printf("Can not read k\n"); exit(-1);}
  if (debug) printf("k=%d\n",*k);
- fread(next, sizeof(long), 1, f);
+ if (fread(next, sizeof(long), 1, f)  == 0) { printf("Can not read next\n"); exit(-1);}
  if (debug) printf("next=%ld\n",*next);
  *dev = malloc(sizeof(double)*(*count));
- fread(*dev, sizeof(double), *i, f);
+ if (fread(*dev, sizeof(double), *i, f) == 0) { printf("Can not read dev\n"); exit(-1);}
  if (debug) printf("dev loaded\n");
  fclose(f);
 }

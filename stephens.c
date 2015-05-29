@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
   }
 
   /* Read the number of elements */
-  fscanf(fp,"#%d\n",&n);
+  if (fscanf(fp,"#%d\n",&n)) {fprintf(stderr, "Can not read number of elements\n"); exit(-1);}
   x = malloc(sizeof(double)*n);
 
   readArray(fp, x, n);
